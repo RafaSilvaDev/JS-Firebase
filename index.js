@@ -12,36 +12,41 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-var todosRef = firebase.database().ref().child("todos");
+var todosRef = firebase
+  .database()
+  .ref()
+  .child("todos");
 
 var todoList = document.getElementById("listaDeTarefas");
 
 todosRef.on("value", function (todos) {
   var temp = "";
+  
   todos.forEach(function (todo) {
     todoItem = todo.val();
     if (!todoItem.isDone) {
       temp +=
-        "<p><label class='undone'>" +
+        "<p class='todo'><label class='undone'>" +
         todoItem.todo +
-        "</label> <button onclick='updateTodo(\"" +
+        "</label> <button class='feita' onclick='updateTodo(\"" +
         todo.key +
         '",true,"' +
         todoItem.todo +
-        "\")'>done</button></p>";
+        "\")'>feita</button></p><hr/>";
     } else {
       temp +=
-        "<p><label class='done'>" +
+        "<p class='todo'><label class='done'>" +
         todoItem.todo +
-        "</label> <button onclick='updateTodo(\"" +
+        "</label> <button class='desfazer' onclick='updateTodo(\"" +
         todo.key +
         '",false,"' +
         todoItem.todo +
-        "\")'>undone</button><button onclick='removeTodo(\"" +
+        "\")'>desfazer</button><button class='remover' onclick='removeTodo(\"" +
         todo.key +
-        "\")'>remove</button></p>";
+        "\")'>remover</button></p><hr/>";
     }
   });
+
   todoList.innerHTML = temp;
 });
 
@@ -52,7 +57,10 @@ document
 function onSubmitForm(e) {
   e.preventDefault();
 
-  var todo = document.getElementById("txtTodo").value;
+  var todo = document
+    .getElementById("txtTodo")
+    .value;
+
   todo == "" ? alert("Insira uma tarefa") : saveTodo(todo);
 
   document.getElementById("myTodoListForm").reset();

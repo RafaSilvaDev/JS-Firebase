@@ -1,34 +1,100 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+  --blue: rgba(98, 144, 195, 1);
+  --lightblue: rgba(98, 144, 195, 0.1);
+  --dark: rgb(52, 64, 85);
 }
 
-body{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
-.box{
-    border: 1px solid #000;
-    padding: 30px 15px;
-    height: 400px;
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--blue);
 }
 
-#listaDeTarefas{
-    overflow-y: scroll;
-    border: 1px solid #000;
-    max-height: 50px;
+.box {
+  border: 7px solid var(--dark);
+  background-color: #fff;
+  padding: 30px 15px;
+  height: 400px;
+  border-radius: 10px;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+#txtTodo {
+  border: none;
+  border-bottom: 1px solid var(--dark);
+  color: var(--dark);
+  margin-bottom: 10px;
+  outline: 0;
+  width: 100%;
+  padding: 5px;
+  transition: all 0.2s;
+}
+
+#txtTodo:focus {
+  background: var(--lightblue);
+  transition: all 0.2s;
+}
+
+button{
+    cursor: pointer;
+}
+
+.add {
+  width: 100%;
+  margin: 10px 0;
+  padding: 6px;
+  background-color: var(--dark);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.2s;
+}
+
+.add:hover {
+  background-color: var(--blue);
+  transition: all 0.2s;
+}
+
+#listaDeTarefas {
+  overflow-y: auto;
+  max-height: 175px;
+  padding: 5px;
 }
 
 .done {
-    color: green;
-    text-decoration: line-through;
+  color: green;
+  text-decoration: line-through;
 }
 
 .undone {
-    color: red;
+  color: red;
+}
+
+.todo{
+    margin: 5px 0;
+}
+
+.feita{
+    float: right;
+}
+
+.desfazer{
+    float: right;
+}
+
+.remover{
+    float: right; margin-right: 5px;
 }
