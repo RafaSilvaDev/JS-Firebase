@@ -1,13 +1,13 @@
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyAgwsjGs6DJe0QWl9raaBnvDZF0PvNGttk",
-  authDomain: "python-firebase-ifsp.firebaseapp.com",
-  databaseURL: "https://python-firebase-ifsp-default-rtdb.firebaseio.com",
-  projectId: "python-firebase-ifsp",
-  storageBucket: "python-firebase-ifsp.appspot.com",
-  messagingSenderId: "492708358001",
-  appId: "1:492708358001:web:e6d9fbdac40884aace78d0",
-  measurementId: "G-6CB4RXDTHM",
+  apiKey: "AIzaSyBE7VEObeke3kGzYxIXJCYd-poieuc7-VA",
+  authDomain: "web-firebase-ifsp.firebaseapp.com",
+  databaseURL: "https://web-firebase-ifsp-default-rtdb.firebaseio.com",
+  projectId: "web-firebase-ifsp",
+  storageBucket: "web-firebase-ifsp.appspot.com",
+  messagingSenderId: "42605587171",
+  appId: "1:42605587171:web:22a2b04af0d5ea98f273d6",
+  measurementId: "G-548K6XL5N8"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 var todosRef = firebase
   .database()
   .ref()
-  .child("todos");
+  .child("tarefas");
 
 var todoList = document.getElementById("listaDeTarefas");
 
@@ -24,23 +24,23 @@ todosRef.on("value", function (todos) {
   
   todos.forEach(function (todo) {
     todoItem = todo.val();
-    if (!todoItem.isDone) {
+    if (!todoItem.feita) {
       temp +=
         "<p class='todo'><label class='undone'>" +
-        todoItem.todo +
+        todoItem.nome +
         "</label> <button class='feita' onclick='updateTodo(\"" +
         todo.key +
         '",true,"' +
-        todoItem.todo +
+        todoItem.nome +
         "\")'>feita</button></p><hr/>";
     } else {
       temp +=
         "<p class='todo'><label class='done'>" +
-        todoItem.todo +
+        todoItem.nome +
         "</label> <button class='desfazer' onclick='updateTodo(\"" +
         todo.key +
         '",false,"' +
-        todoItem.todo +
+        todoItem.nome +
         "\")'>desfazer</button><button class='remover' onclick='removeTodo(\"" +
         todo.key +
         "\")'>remover</button></p><hr/>";
@@ -68,19 +68,19 @@ function onSubmitForm(e) {
 
 function saveTodo(todoName) {
   var newTodo = todosRef.push();
-  newTodo.set({ todo: todoName, isDone: false });
+  newTodo.set({ nome: todoName, feita: false });
 }
 
 function updateTodo(key, status, todoName) {
   firebase
     .database()
-    .ref("todos/" + key)
-    .set({ isDone: status, todo: todoName });
+    .ref("tarefas/" + key)
+    .set({ feita: status, nome: todoName });
 }
 
 function removeTodo(key) {
   firebase
     .database()
-    .ref("todos/" + key)
+    .ref("tarefas/" + key)
     .remove();
 }
